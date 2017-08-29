@@ -12,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
     int currentPlayer = 0; // 0 = yellow, 1 = red
 
     //2 is not played
-    int [] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
-    int[][] winning = {{0,1,2},{3,4,5},{6,7,8},{0,3,6}, {1,4,7},{2,5,8} ,{0,4,8} ,{2,4,6}};
+    int [] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2}; // set to 2 so users can't override occupied areas
+    int[][] winning = {{0,1,2},{3,4,5},{6,7,8},{0,3,6}, {1,4,7},{2,5,8} ,{0,4,8} ,{2,4,6}}; //winning areas
 
     public void dropIn (View view){
 
@@ -24,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         if (gameState[tapped] == 2) {
             gameState[tapped] = currentPlayer;
 
-            counter.setTranslationY(-1000f);
-            if (currentPlayer == 0) {
-                counter.setImageResource(R.drawable.yellow);
+            counter.setTranslationY(-1000f); //keeps images offscreen at -1000dp
+            if (currentPlayer == 0) { //yellow's turn
+                counter.setImageResource(R.drawable.yellow); //set image to yellow coin
                 currentPlayer = 1;
-            } else {
-                counter.setImageResource(R.drawable.red);
+            } else { //red's turn
+                counter.setImageResource(R.drawable.red); //set image to red coin
                 currentPlayer = 0;
             }
-            counter.animate().translationYBy(1000f).rotation(360).setDuration(300);
+            counter.animate().translationYBy(1000f).rotation(360).setDuration(300); //animate coins 1000dp onscreen and rotate
 
             for (int[] winnings : winning){
                 if (gameState[winnings[0]] == gameState[winnings[1]] &&
